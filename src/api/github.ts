@@ -14,7 +14,6 @@ export class GitHub {
             baseURL: this.BASE_URL,
             headers: {
                 'Authorization': `Bearer ${process.env.VUE_APP_API_TOKEN}`,
-                'Accept': 'application/vnd.github.v3+json',
             },
         })
 
@@ -28,11 +27,18 @@ export class GitHub {
 
     }
 
-    private buildQueryParams(sortBy: String): String {
-        return sortBy
+    private buildQueryParams(sortBy: String, onlyfeatured: Boolean = false): String {
+        return `${sortBy}:asc`
     }
 
-    search(query: String, sortBy: String): AxiosPromise<AxiosResponse> {
+    searchUsers(query: String, sortby: String = 'joined'): AxiosPromise<AxiosResponse> {
+        this.ax.defaults.headers.common['Accept'] = 'application/vnd.github.v3+json'
+        // return this.ax.get(`/search/users?q=${query}+${this.buildQueryParams(sortby)}`)
         return this.ax.get(`/search/users?q=${query}`)
+    }
+
+    searchTopics(query: String, sortby: String, onlyfeatured: Boolean = false): AxiosPromise<AxiosResponse> {
+        this.ax.defaults.headers.common['Accept'] = 'application/vnd.github.mercy-preview+json'
+        return this.ax.get(`/search/topics?q=${query}+${this.buildQueryParams(sortby, onlyfeatured)}`)
     }
 }

@@ -1,0 +1,40 @@
+// Shared styles
+$button-border-color: $secondary !default
+$button-border: 2px solid $button-border-color !default
+$button-background-focus: transparent !default
+$button-text-color: darken($secondary, 10%)
+$button-font-size: 14px !default
+
+$button-height: 49px !default
+$button-padding: 0 46px !default
+$button-radius: 2px !default
+
+.button
+    border: $button-border
+    border-radius: $button-radius
+    display: inline-block
+    height: $button-height
+    line-height: $button-height
+    padding: $button-padding
+    text-transform: uppercase
+    vertical-align: middle
+    -webkit-tap-highlight-color: transparent // Gets rid of tap active state
+    text-decoration: none
+    color: $button-text-color
+    font-family: $body-font
+    font-weight: bolder
+    background-color: transparent
+    text-align: center
+    letter-spacing: .5px
+    transition: background-color .2s ease-out
+    cursor: pointer
+    &:hover
+        opacity: 0.8
+    &:focus
+        background-color: darken($secondary, 10%)
+        color: darken($secondary, 80%)
+.button.primary
+    background-color: $primary
+    border: $primary
+    color: white
+    font-family: $heading-font

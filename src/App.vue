@@ -12,13 +12,10 @@
 
         </transition>
 
-
 		<!-- APP ACTUAL -->
         <transition name="fade" mode="out-in">
 
-            <keep-alive>
-                <router-view v-show="!showGlobalSpinner"></router-view>
-            </keep-alive>
+            <router-view v-show="!showGlobalSpinner"></router-view>
 
         </transition>
 
@@ -67,5 +64,8 @@ export default {
 </script>
 
 <style lang="sass">
-
+.fade-enter-active, .fade-leave-active
+    transition: opacity .2s
+.fade-enter, .fade-leave-to
+    opacity: 0
 </style>

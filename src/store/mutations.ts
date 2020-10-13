@@ -14,8 +14,8 @@ const mutations = {
         EventBus.$emit(MESSAGES, API_SUCCESS)
         EventBus.$emit(LOADING, false)
     },
-    [TOPIC_RESULTS]: (state: State, results: Results) => {
-        state.topicResults = results
+    [TOPIC_RESULTS]: (state: State, results: AxiosResponse) => {
+        state.topicResults = results.data
         EventBus.$emit(MESSAGES, API_SUCCESS)
         EventBus.$emit(LOADING, false)
     },

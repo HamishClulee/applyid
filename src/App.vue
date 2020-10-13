@@ -13,11 +13,14 @@
         </transition>
 
 		<!-- APP ACTUAL -->
-        <transition name="fade" mode="out-in">
 
-            <router-view v-show="!showGlobalSpinner"></router-view>
+        <keep-alive>
+            <transition name="fade" mode="out-in">
 
-        </transition>
+                <router-view v-show="!showGlobalSpinner"></router-view>
+
+            </transition>
+        </keep-alive>
 
         <usermessages v-bind="{ msg, type }" v-if="showUserMessage"></usermessages>
 

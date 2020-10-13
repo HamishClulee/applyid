@@ -27,18 +27,25 @@ export class GitHub {
 
     }
 
-    private buildQueryParams(sortBy: String, onlyfeatured: Boolean = false): String {
-        return `${sortBy}:asc`
+    private buildTopicParams(sortBy: String, onlyfeatured: Boolean): String {
+        if(!sortBy && !onlyfeatured) return ``
+        else if (sortBy && !onlyfeatured) return `&sort:${sortBy}`
+        else if (!sortBy && onlyfeatured) return `+is:featured`
+        else return `+is:featured&sort:${sortBy}`
     }
 
-    searchUsers(query: String, sortby: String = 'joined'): AxiosPromise<AxiosResponse> {
+    private buildUserParams(sortBy: String): String {
+        if (!sortBy) sortBy = 'joined'
+        return `sort:${sortBy}`
+    }
+
+    searchUsers(query: String, sortby: String): AxiosPromise<AxiosResponse> {
         this.ax.defaults.headers.common['Accept'] = 'application/vnd.github.v3+json'
-        // return this.ax.get(`/search/users?q=${query}+${this.buildQueryParams(sortby)}`)
-        return this.ax.get(`/search/users?q=${query}`)
+        return this.ax.get(`/search/users?q=${query}+${this.buildUserParams(sortby)}`)
     }
 
     searchTopics(query: String, sortby: String, onlyfeatured: Boolean = false): AxiosPromise<AxiosResponse> {
         this.ax.defaults.headers.common['Accept'] = 'application/vnd.github.mercy-preview+json'
-        return this.ax.get(`/search/topics?q=${query}+${this.buildQueryParams(sortby, onlyfeatured)}`)
+        return this.ax.get(`/search/topics?q=${query}${this.buildTopicParams(sortby, onlyfeatured)}`)
     }
 }

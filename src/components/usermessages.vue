@@ -39,7 +39,7 @@ export default {
 .message-container
     position: fixed
     bottom: 20px
-    left: 20px
+    right: 20px
     padding: 15px 40px
     border-radius: 3px
     border: 1px solid $light-gray

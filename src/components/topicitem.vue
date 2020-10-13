@@ -1,5 +1,5 @@
 <template>
-    <section class='result-item-container layout-col' v-if="topic.display_name && topic.description">
+    <section class='result-item-container layout-col'>
         <h5>{{ topic.display_name }}</h5>
         <p>{{ topic.description }}</p>
         <h6>Created By {{ topic.created_by }}</h6>

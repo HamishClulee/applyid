@@ -14,16 +14,16 @@
             <h5>Sort by:</h5>
             <div class="radios-container layout-row">
                 <div class="radio-item layout-col">
-                    <input type="radio" id="followers" v-model="sortby" name="sortby" value="followers">
-                    <label for="male">Followers</label><br>
+                    <input type="radio" v-model="sortby" name="sortby" value="followers">
+                    <label for="followers">Followers</label><br>
                 </div>
                 <div class="radio-item layout-col">
-                    <input type="radio" id="repos" v-model="sortby" name="sortby" value="repos">
-                    <label for="female">Repos</label><br>
+                    <input type="radio" v-model="sortby" name="sortby" value="repos">
+                    <label for="repos">Repos</label><br>
                 </div>
                 <div class="radio-item layout-col">
-                    <input type="radio" id="joined" v-model="sortby" name="sortby" value="joined" checked="true">
-                    <label for="other">Joined</label>  
+                    <input type="radio" v-model="sortby" name="sortby" value="joined" checked="true">
+                    <label for="joined">Joined</label>  
                 </div>
             </div>
         </div>
@@ -32,16 +32,20 @@
             <h5>Sort by:</h5>
             <div class="radios-container layout-row">
                 <div class="radio-item layout-col">
-                    <input type="radio" id="name" v-model="sortby" name="sortby" value="name">
-                    <label for="male">Name</label><br>
+                    <input type="radio" v-model="sortby" name="sortby" value="name">
+                    <label for="name">Name</label><br>
                 </div>
                 <div class="radio-item layout-col">
-                    <input type="radio" id="createat" v-model="sortby" name="sortby" value="createat">
-                    <label for="female">Created At</label><br>
+                    <input type="radio" v-model="sortby" name="sortby" value="created">
+                    <label for="created">Created At</label><br>
+                </div>
+                <div class="radio-item layout-col final-radio">
+                    <input type="radio" v-model="sortby" name="sortby" value="none">
+                    <label for="none">No Sort</label><br>
                 </div>
                 <div class="radio-item layout-col">
-                    <input type="checkbox" id="featured" name="featured" v-model="onlyfeatured" value="fetauredonly">
-                    <label for="female">Featured Only</label><br>
+                    <input type="checkbox" name="featured" v-model="onlyfeatured" value="fetauredonly">
+                    <label for="featured">Featured Only</label>
                 </div>
             </div>
         </div>
@@ -61,8 +65,8 @@ export default {
             onlyfeatured: false,
         }
     },
-    mounted() {
-
+    created() {
+        this.sortby = this.$route.name === 'Users' ? 'joined' : 'none'
     },
     methods: {
         ...mapMutations(['USER_RESULTS', 'TOPIC_RESULTS']),
@@ -91,6 +95,9 @@ export default {
 </script>
 
 <style lang="sass" scoped>
+.final-radio
+    border-right: 1px solid $light-gray
+    padding-right: 25px
 .seachbar-container
     width: 100%
 .user-controls
@@ -107,7 +114,7 @@ export default {
     border-radius: 0
     font-size: 1.2em
     padding: 7px 0
-    width: 600px
+    width: 400px
     outline: none
     &:hover 
         border-bottom: 1px solid $medium-gray

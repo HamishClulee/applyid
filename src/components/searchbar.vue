@@ -8,8 +8,7 @@
 
 <script>
 import { mapMutations } from 'vuex'
-import { LOADING } from '../../../welcomeqr.codes/front/main-app/src/EventBus'
-import { EventBus, USER_RESULTS } from '../EventBus'
+import { EventBus, USER_RESULTS, LOADING } from '../EventBus'
 export default {
     name: 'searchbar',
     data() {

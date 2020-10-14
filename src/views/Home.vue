@@ -1,23 +1,21 @@
 <template>
     <div class="page-container restrict">
         <searchresults
-            v-if="userResults.items && userResults.items.length > 0"
-            resultType="user"
+            :mode="mode"
         ></searchresults>
-        <div v-else class="no-results layout-center-all layout-col">
-            <h2>No Results</h2>
-        </div>
     </div>
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import { USER_MODE } from '../constants'
 import searchresults from '../components/searchresults'
 export default {
     name: 'home',
     components: { searchresults },
-    computed: {
-        ...mapGetters(['userResults']),
+    data() {
+        return {
+            mode: USER_MODE,
+        }
     },
 }
 </script>

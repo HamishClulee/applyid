@@ -2,17 +2,20 @@
     <section class="navbar-con">
 
         <div class="navbar-left">
-            <searchbar v-if="$route.name !== 'notfound'"></searchbar>
+            <searchbar :mode="mode" v-if="$route.name !== 'notfound'"></searchbar>
         </div>
 
         <div class="navbar-right">
 
-            <div class="text-item" :class="checkvis('Users') ? 'active-route' : 'inactive-route'">
-                <router-link :to="{ path: '/'}">Users</router-link>
-            </div>
-             <div class="text-item" :class="checkvis('Topics') ? 'active-route' : 'inactive-route'">
-                <router-link :to="{ path: '/topics'}">Topics</router-link>
-            </div>
+            <router-link
+                class="router-button layout-center-all layout-col"
+                :to="{ path: '/'}">Users
+            </router-link>
+
+             <router-link 
+                class="router-button layout-center-all layout-col"
+                :to="{ path: '/topics'}">Topics
+            </router-link>
             
         </div>
 
@@ -23,9 +26,10 @@ import searchbar from './searchbar'
 export default {
     name: 'topbar',
     components: { searchbar },
-    methods: {
-        checkvis(item) {
-            return item === this.$route.name
+    props: {
+        mode: {
+            type: String,
+            required: true,
         },
     },
 }
@@ -36,14 +40,10 @@ export default {
     flex-direction: row
     background-color: white
     z-index: 200
-    a
-        color: $font
-        text-transform: uppercase
-        margin-right: 20px
 .navbar-left
     align-items: center
     justify-content: flex-start
-    width: 80%
+    width: 100%
     padding-left: 10px
 .navbar-con
     position: fixed
@@ -58,38 +58,22 @@ export default {
 .navbar-right
     align-items: center
     justify-content: flex-end
-    width: 15%
-    margin-right: 20px
-    border-left: 1px solid $light-gray
-.active-route
-    display: flex
-    flex-direction: column
-    &:after
-        content: ''
-        width: 30px
-        height: 2px
-        background-color: $primary
-        position: relative
-        top: 2px
-        right: 2px
-.inactive-route
-    display: flex
-    flex-direction: column
-    &:hover
-        &:after
-            content: ''
-            width: 30px
-            height: 2px
-            background-color: lighten($primary, 20)
-            position: relative
-            top: 2px
-            right: 2px
-    &:after
-        content: ''
-        width: 30px
-        height: 2px
-        background-color: white
-        position: relative
-        top: 2px
-        right: 2px
+    width: 170px
+    .router-button
+        width: 84px
+        color: $font
+        text-transform: uppercase
+        height: $navbar-height
+        border-left: 1px solid $light-gray
+        cursor: pointer
+        &:hover
+            background: $light-gray
+    .router-link-exact-active
+        display: flex
+        flex-direction: column
+        background: $secondary
+        color: white
+        &:hover
+            background: $secondary
+
 </style>

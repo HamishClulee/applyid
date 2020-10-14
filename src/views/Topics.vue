@@ -1,23 +1,21 @@
 <template>
     <div class="page-container restrict">
         <searchresults
-            v-if="topicResults.items && topicResults.items.length > 0"
-            resultType="topic"
+            :mode="mode"
         ></searchresults>
-        <div v-else class="no-results layout-center-all layout-col">
-            <h2>No Results</h2>
-        </div>
     </div>
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import { TOPIC_MODE } from '../constants'
 import searchresults from '../components/searchresults'
 export default {
     name: 'topics',
     components: { searchresults },
-    computed: {
-        ...mapGetters(['topicResults']),
+    data() {
+        return {
+            mode: TOPIC_MODE,
+        }
     },
 }
 </script>

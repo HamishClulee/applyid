@@ -3,6 +3,6 @@ export interface State {
     topicResults: Results,
 }
 export interface Results {
-    totalItems?: Number,
+    total_count?: Number,
     items?: Array<any>,
 }

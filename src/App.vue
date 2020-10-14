@@ -1,25 +1,16 @@
 <template>
     <main class="app-container">
 
-        <topbar></topbar>
+        <topbar :mode="getMode"></topbar>
 
-        <!-- GLOBAL SPINNER -->
         <transition name="fade" mode="out-in">
-
             <div v-show="showGlobalSpinner" class="global-spinner-con">
                 <loading></loading>
             </div>
-
         </transition>
 
-		<!-- APP ACTUAL -->
-
         <keep-alive>
-            <transition name="fade" mode="out-in">
-
-                <router-view v-show="!showGlobalSpinner"></router-view>
-
-            </transition>
+            <router-view v-show="!showGlobalSpinner"></router-view>
         </keep-alive>
 
         <usermessages v-bind="{ msg, type }" v-if="showUserMessage"></usermessages>
@@ -28,6 +19,7 @@
 </template>
 
 <script>
+import { USER_MODE, TOPIC_MODE } from './constants'
 import topbar from './components/topnav'
 import usermessages from './components/usermessages'
 import loading from './components/loading'
@@ -62,6 +54,13 @@ export default {
             this.msg = deets.msg
             this.type = deets.type
         })
+    },
+    computed: {
+        getMode() {
+            if (this.$route.name === USER_MODE) return USER_MODE
+            if (this.$route.name === TOPIC_MODE) return TOPIC_MODE
+            else return ''
+        },
     },
 }
 </script>
